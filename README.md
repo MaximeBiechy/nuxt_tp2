@@ -1,3 +1,10 @@
+Côté client : 
+![image](https://github.com/user-attachments/assets/17132cfd-f4db-4332-a5d6-21c66ebfbf13)
+
+Côté serveur : 
+![image](https://github.com/user-attachments/assets/088ebf1c-9245-4a4e-90a3-6f45b389a7e1)
+
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
