@@ -12,7 +12,7 @@ const navigateToBeerType = () => {
 
 <template>
   <div>
-    <h1>Choisissez le type de bière</h1>
+    <h1>Type de bière</h1>
     <select v-model="beerType">
       <option value="ale">IPA</option>
       <option value="stouts">Stouts</option>

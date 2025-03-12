@@ -13,12 +13,7 @@ const pageSize = ref<number>(10)
 
 const fetchBeers = async () => {
   try {
-    beers.value = await $fetch<Beer[]>(`https://api.sampleapis.com/beers/${beerType.value}`, {
-      params: {
-        page: page.value,
-        pageSize: pageSize.value
-      }
-    })
+    beers.value = await $fetch<Beer[]>(`https://api.sampleapis.com/beers/${beerType.value}`)
   } catch (error) {
     console.error('Error fetching beers:', error)
   }

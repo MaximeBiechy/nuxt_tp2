@@ -1,24 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted, computed, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import type { Beer } from '~/types/Beer'
+import {ref, onMounted, computed, watch} from 'vue'
+import {useRoute, useRouter} from 'vue-router'
+import type {Beer} from '~/types/Beer'
 
 const route = useRoute()
 const router = useRouter()
 const beers = ref<Beer[] | null>(null)
 const maxPrice = ref<string>(route.query.pricemax as string || '')
+const beerType = ref<string>(route.query.type as string || 'ale')
 const page = ref<number>(parseInt(route.query.page as string) || 1)
 const pageSize = ref<number>(10)
 
 const fetchBeers = async () => {
   try {
-    const { data } = await useFetch<Beer[]>('https://api.sampleapis.com/beers/ale', {
-      params: {
-        pricemax: maxPrice.value,
-        page: page.value,
-        pageSize: pageSize.value
-      }
-    })
+    const {data} = await useFetch<Beer[]>(`https://api.sampleapis.com/beers/${beerType.value}`)
     beers.value = data.value
   } catch (error) {
     console.error('Error fetching beers:', error)
@@ -44,7 +39,7 @@ const prevPage = () => {
 }
 
 watch([maxPrice, page], () => {
-  router.push({ query: { pricemax: maxPrice.value, page: page.value } })
+  router.push({query: {pricemax: maxPrice.value, type: beerType.value, page: page.value}})
   fetchBeers()
 })
 
@@ -68,7 +63,7 @@ const isFavorite = (beer: Beer) => {
 <template>
   <div>
     <h1>Bières Serveur</h1>
-    <input v-model="maxPrice" placeholder="Prix maximum" />
+    <input v-model="maxPrice" placeholder="Prix maximum"/>
     <ul>
       <li v-for="beer in filteredBeers" :key="beer.id">
         <h2>{{ beer.name }}</h2>

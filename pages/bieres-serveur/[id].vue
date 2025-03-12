@@ -5,7 +5,7 @@ import type {Beer} from "~/types/Beer";
 const route = useRoute()
 const beerId = route.params.id
 
-const {data: beer} = await useFetch<Beer[]>(`https://api.sampleapis.com/beers/ale/${beerId}`)
+const {data: beer} = await useFetch<Beer>(`https://api.sampleapis.com/beers/ale/${beerId}`)
 </script>
 
 <template>
