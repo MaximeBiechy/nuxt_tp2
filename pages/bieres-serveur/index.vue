@@ -13,14 +13,15 @@ const pageSize = ref<number>(10)
 
 const fetchBeers = async () => {
   try {
-    const {data} = await useFetch<Beer[]>(`https://api.sampleapis.com/beers/${beerType.value}`)
-    beers.value = data.value
+    const response = await fetch(`https://api.sampleapis.com/beers/${beerType.value}`)
+    const data = await response.json()
+    beers.value = data
   } catch (error) {
     console.error('Error fetching beers:', error)
   }
 }
 
-onMounted(fetchBeers)
+await fetchBeers()
 
 const filteredBeers = computed(() => {
   if (!beers.value) return []
